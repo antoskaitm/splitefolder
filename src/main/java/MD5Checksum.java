@@ -5,9 +5,12 @@ import java.security.MessageDigest;
 
 public class MD5Checksum {
 
-    public static boolean sameHash(File file1, File file2) throws Exception {
-        return getMD5Checksum(file1.getAbsolutePath())
-                .equals(getMD5Checksum(file2.getAbsolutePath()));
+    /**
+     * проверить правильность компирования файлов файлов через хешсуммы
+     */
+    public static boolean sameHash(File copy, File original) throws Exception {
+        return getMD5Checksum(copy.getAbsolutePath())
+                .equals(getMD5Checksum(original.getAbsolutePath()));
     }
 
     private static byte[] createChecksum(String filename) throws Exception {
@@ -30,7 +33,7 @@ public class MD5Checksum {
 
     // see this How-to for a faster way to convert
     // a byte array to a HEX string
-    public static String getMD5Checksum(String filename) throws Exception {
+    private static String getMD5Checksum(String filename) throws Exception {
         byte[] b = createChecksum(filename);
         String result = "";
 

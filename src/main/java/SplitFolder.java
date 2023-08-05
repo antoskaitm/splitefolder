@@ -1,9 +1,6 @@
 import java.io.File;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -11,13 +8,21 @@ import java.util.stream.Collectors;
 public class SplitFolder {
     private final File sourceDir;
     private final File destinationDir;
-    private final Long maxSize;// = 4400 * 1024 * 1024L; //размер дробления
+    /**
+     * максимальный размер дробления папки в байтах
+     */
+    private final Long maxSize;
     private final Map<File, Long> parts = new TreeMap<>();
 
-    public SplitFolder(File sourceDir, File destinationDir, Long size) {
+    /**
+     * @param sourceDir папка источник которая дробится (остается не изменной)
+     * @param destinationDir папка назначения куда будут сброшенна раздробленнаая папка
+     * @param maxSize размер который не должена привышать разбитая папка в мегабайтах
+     */
+    public SplitFolder(File sourceDir, File destinationDir, Long maxSize) {
         this.sourceDir = sourceDir;
         this.destinationDir = destinationDir;
-        this.maxSize = size;
+        this.maxSize = maxSize * 1024 * 1024L;
     }
 
     /* сначала сортирую по самому большому файлу и пишу большие файлы

@@ -9,7 +9,7 @@ public class SplitFolderTest {
     public void copy() {
         new SplitFolder(new File("D:\\в питер на запись\\видео\\языки"),
                 new File("D:\\test"),
-                4400 * 1024 * 1024L
+                4400L
         ).start();
     }
 }
