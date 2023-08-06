@@ -1,3 +1,5 @@
+package ru.ton_ton.splitFolder.core;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;

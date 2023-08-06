@@ -1,4 +1,5 @@
 
+import ru.ton_ton.splitFolder.core.SplitFolder;
 import org.junit.Test;
 
 import java.io.File;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <CustomLevels>
+        <CustomLevel name="OUTPUT_UI" intLevel="50"/>
+    </CustomLevels>
+
+    <Appenders>
+        <File name="file" fileName="logs/app.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <LogAppenderUI/>
+    </Appenders>
+
+    <Loggers>
+        <root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="LogAppenderUI" level="OUTPUT_UI"/>
+        </root>
+    </Loggers>
+</Configuration>

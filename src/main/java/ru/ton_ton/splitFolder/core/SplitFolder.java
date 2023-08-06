@@ -1,9 +1,12 @@
+package ru.ton_ton.splitFolder.core;
+
+import ru.ton_ton.splitFolder.logging.ui.OutputUI;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Collectors;
-
 
 public class SplitFolder {
     private final File sourceDir;
@@ -13,11 +16,12 @@ public class SplitFolder {
      */
     private final Long maxSize;
     private final Map<File, Long> parts = new TreeMap<>();
+    private Long fileNumber = 0L;
 
     /**
-     * @param sourceDir папка источник которая дробится (остается не изменной)
+     * @param sourceDir      папка источник которая дробится (остается не изменной)
      * @param destinationDir папка назначения куда будут сброшенна раздробленнаая папка
-     * @param maxSize размер который не должена привышать разбитая папка в мегабайтах
+     * @param maxSize        размер который не должена привышать разбитая папка в мегабайтах
      */
     public SplitFolder(File sourceDir, File destinationDir, Long maxSize) {
         this.sourceDir = sourceDir;
@@ -41,7 +45,7 @@ public class SplitFolder {
                 copy(file);
             }
         }
-        /*for (Folder folder : folders) {
+        /*for (core.Folder folder : folders) {
             for (File file : folder.getFiles().stream().filter(f -> f.length() < 100L)
                     .sorted(Comparator.comparingLong(File::length).reversed())
                     .collect(Collectors.toList())) {
@@ -57,6 +61,7 @@ public class SplitFolder {
             File newFile = new File(newDestination + "//" + file.getName());
             for (int i = 0; i < 4; i++) {
                 if (newFile.exists() && MD5Checksum.sameHash(file, newFile)) {
+                    OutputUI.add(++fileNumber + " фаил скопирован:" + newFile.toPath());
                     break;
                 }
                 Files.copy(file.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
